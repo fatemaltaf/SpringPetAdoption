@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+    <h1>Users</h1>
+ 
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Photos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="pet : ${pets}">
+                <td th:text="${pet.name}"></td>
+                <td><img th:src="@{${pet.getPhotosImagePath()}}" /></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style>
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-color: rgb(253, 241, 223);
+            scroll-behavior: smooth;
+            }
+            
+            .navbar {
+            overflow: hidden;
+            }
+            
+            .navbar img {
+            float: left;
+            height: 18rem;
+            width: 18rem;
+            position: absolute;
+            margin-top: -4rem;
+            margin-left: -4rem;
+            }
+
+            .navbar a {
+            float: right;
+            font-size: 19px;
+            color: black;
+            text-align: center;
+            padding: 50px 30px;
+            text-decoration: none;
+            }
+            
+            .subnav {
+            float: right;
+            overflow: hidden;
+            }
+            
+            .subnav .subnavbtn {
+            font-size: 19px;  
+            border: none;
+            outline: none;
+            color: black;
+            padding: 50px 30px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            }
+            
+            .navbar a:hover, .subnav:hover .subnavbtn {
+            background-color: #fdaf49;
+            }
+            
+            .subnav-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #fdaf49;
+            opacity: 0.6;
+            width: 100%;
+            z-index: 1;
+            }
+            
+            .subnav-content a {
+            float: right;
+            color: black;
+            text-decoration: none;
+            }
+            
+            .subnav-content a:hover {
+            background-color: #fbec1c;
+            color: black;
+            }
+            
+            .subnav:hover .subnav-content {
+            display: block;
+            }
+
+            .main-content img{
+                display: flex;
+                float: right;
+                margin-top: -9rem;
+            }
+            .tag-line{
+              font-family: 'Poppins', sans-serif;  
+              font-size: 40px; 
+              font-weight: 600;
+              
+              margin-left: 10rem;
+              margin-top: 6rem;
+              
+            }
+            .submit{
+              background-color: #e90000;
+              color: rgb(255, 255, 255);
+              border-color:  transparent;
+              border-radius: 12px;
+              padding: 10px 20px;  
+              font-size: 20px; 
+              cursor: pointer; 
+              margin-left: 14rem;
+
+
+            }
+            .mission{
+              font-family: 'Poppins', sans-serif;  
+              font-size: 20px; 
+              font-weight: 600;
+              margin-top: 12rem;
+              float: left;
+              margin-left: 10rem;
+              line-height: 2;
+            }
+            .money{
+              float: right;
+              margin-top: -20rem;
+            }
+            .how{
+              margin-top: 35rem;
+              
+            
+            }
+            
+            .wrapper{
+            font-family: 'Poppins', sans-serif;  
+            width: 350px;
+            height: 320px;
+            padding: 25px;
+            display: inline-table;
+            margin-top: 2rem;
+            margin-right: -5rem;
+            margin-left: 13.5rem;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+            
+          }
+          h1{
+            font-size: 1.5rem;
+            color: #ee3e13;
+          }
+          .cth{
+            
+              font-size: 20px; 
+
+          }
+         .number{
+          font-family: 'Poppins', sans-serif; 
+          font-size: 20px;
+          /* display: flex; */
+          margin-top: 4rem;
+          margin-left: 45%;
+         }
+         .reports{
+          margin-top: 2rem;
+         }
+         .facts{
+          font-family: 'Poppins', sans-serif;  
+            width: 200px;
+            height: 150px;
+            padding: 25px;
+            display: inline-table;
+            margin-top: 2rem;
+            margin-right: -5rem;
+            margin-left: 13.5rem;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+         }
+         h3{
+          font-size: 1rem;
+          margin-top: 1.5rem;
+          margin-left: 2rem;
+            color: #114b5F;
+         }
+         .donation{
+              margin-top: 2rem;
+              margin-left:25%;
+              margin-bottom: 2rem;
+
+         }
+         .container{
+            max-width: 1170px;
+            margin:auto;
+          }
+          .row{
+            display: flex;
+            flex-wrap: wrap;
+          }
+          ul{
+            list-style: none;
+          }
+         .footer{
+          background-color: #FAD5A5;
+            padding: 10px 0;
+            border-radius: 75% 75% 0 0 / 25%;
+        }
+        .footer-col{
+          width: 25%;
+          padding: 0 30px;
+        }
+        .footer-col h4{
+          font-size: 18px;
+          color: black;
+          text-transform: capitalize;
+          margin-bottom: 35px;
+          font-weight: 500;
+          position: relative;
+        }
+        .footer-col h4::before{
+          content: '';
+          position: absolute;
+          left:0;
+          bottom: -10px;
+          background-color: #e91e63;
+          height: 2px;
+          box-sizing: border-box;
+          width: 75px;
+        }
+        .footer-col ul li:not(:last-child){
+          margin-bottom: 10px;
+        }
+        .footer-col ul li a{
+          font-size: 16px;
+          text-transform: capitalize;
+          color: #ffffff;
+          text-decoration: none;
+          font-weight: 600;
+          color: black;
+          display: block;
+          transition: all 0.3s ease;
+        }
+        .footer-col ul li a:hover{
+          color: #251b1b;
+          padding-left: 8px;
+        }
+       
+        @media(max-width: 767px){
+          .footer-col{
+            width: 50%;
+            margin-bottom: 30px;
+        }
+        }
+        @media(max-width: 574px){
+          .footer-col{
+            width: 100%;
+        }
+        }
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+           
+        </style>
+    </head>
+    <body>
+    
+      <div class="navbar">
+        <!-- <img th:src="@{/logo.png}"></img> -->
+        <img th:src="@{/logo.png}"></img>
+        <a th:href="@{/FurryPal/donate}" style="color:#FF9205;">Donate</a>
+        <a th:href="@{/FurryPal/contact}">Contact</a>
+        <a th:href="@{/FurryPal/blog}">Blog</a>
+        <a th:href="@{/FurryPal/buttonb4register}">Register pet</a>
+        <div class="subnav">
+          <button class="subnavbtn">Services <i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <a th:href="@{/FurryPal/petwatching}">Pet Watching</a>
+            <a th:href="@{/FurryPal/grooming}">Grooming</a>
+            <a th:href="@{/FurryPal/training}">Training</a>
+            <a th:href="@{/FurryPal/vet}">Vet</a>
+          </div>
+        </div> 
+        <div class="subnav">
+          <button class="subnavbtn">Categories <i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <a th:href="@{/FurryPal/cat}">Cat</a>
+            <a th:href="@{/FurryPal/dog}">Dog</a>
+          </div>
+        </div>
+        <a th:href="@{/FurryPal/home}">Home</a>
+      </div>
+    </div>
+      <div class="main-content">
+        <img th:src="@{/carry.png}"></img> 
+        <div class="tag-line"><p>Street animals need our protection.</p>
+        <p>Help Them Today!</p></div>
+        <button class="submit"><a th:href="@{/FurryPal/Donation}">Make a Donation</a></button>
+
+      </div>
+    
+      <section id="content">
+        
+          <div class="mission">
+          <p>Our mission is to rescue and treat owner-less street <br>animals of Pune who have become ill or injured,
+             and <br>through their rescue inspire the community to care for,<br>the lives of all animals.  </p> </div>
+            </section>
+            <div class="money">
+              <img th:src="@{/donate.png}" height="450px width=850px"></img>
+            </div>
+              
+            <section class="how">
+            <div class="wrapper">
+              <h1>Help when it's needed most</h1>
+              <div class="cth"><p>Throughout India, animals including dogs, cats live on the streets. 
+                Most cities don't have hospitals for owner-less animals, which means injured or ill animals often die from treatable conditions.
+                 But in Pune, a call to our helpline saves a life.</p></div>
+            </div>
+            
+            <div class="wrapper">
+            <h1>How we save street animals' lives</h1>
+            <div class="cth"><p>Every day we save animals with fractures, wounds, mange, viral diseases, cancer, and much more.
+               We vaccinate against rabies and other illnesses, conduct spay and neuter and educate the community about helping animals.</p></div>
+          </div>
+         
+          <div class="wrapper">
+            <h1>Visit or volunteer in our animal shelter</h1>
+            <div class="cth"><p>Volunteers are a life-sustaining force that enables us to give the best care to the most animals.
+               We offer a tour on Friday, Saturday and Sunday to share the stories of the animals we rescue the animals.</p></div>
+          </div>
+          <div class="wrapper">
+            <h1>So many ways to help</h1>
+            <div class="cth"><p>Become a proud member of our rescue team by making a donation, sponsoring an animal and more.
+                  With your help we rescue thousands of animals each year from desperate situations.</p></div>
+          </div>
+        </section>
+        <!-- <div class="number"><h2>Our Numbers</h3></div> -->
+        
+        <!-- <section class="reports">
+          <div class="facts">
+            <h3>Animals Rescued</h3></div>
+           
+          
+          <div class="facts">
+          <h3>Pets at shelter</h3></div>
+         
+       
+        <div class="facts">
+          <h3>Number of Visits</h3>
+             </div>
+        </section> -->
+             <div class="donation"> <button class="submit"><a th:href="@{/FurryPal/Donation}">Make a Donation</a></button></div>
+
+             <footer>
+              <footer class="footer">
+                <div class="container">
+                  <div class="row">
+                    <div class="footer-col">
+                      <h4>Rescue, Love, Repeat</h4>
+                      <ul>
+                        <li><a th:href="@{/FurryPal/survey}">Find Your Best Fit</a></li>
+                        <li><a th:href="@{/FurryPal/dog}">Dog</a></li>
+                        <li><a th:href="@{/FurryPal/cat}">Cat</a></li>
+                         
+                      </ul>
+                    </div>
+                    <div class="footer-col">
+                      <h4>Services</h4>
+                      <ul>
+                        <li><a th:href="@{/FurryPal/petwatching}">Pet Watching</a></li>
+                        <li><a th:href="@{/FurryPal/vet}">Pet Veterinary</a></li>
+                        <li><a th:href="@{/FurryPal/training}">Pet Training</a></li>
+                        <li><a th:href="@{/FurryPal/grooming}">Pet Grooming</a></li>
+                        
+                      </ul>
+                    </div>
+                    <div class="footer-col">
+                      <h4>Support</h4>
+                      <ul>
+                        <li><a th:href="@{/FurryPal/home}">Home</a></li>
+                        <li><a th:href="@{/FurryPal/contact}">Contact</a></li>
+                        <li><a th:href="@{/FurryPal/blog}">Blog</a></li>
+                         <li><a th:href="@{/FurryPal/donate}">Donate</a></li>
+                       
+                      </ul>
+                    </div>
+                    
+            </footer>
+</body>
+</html>

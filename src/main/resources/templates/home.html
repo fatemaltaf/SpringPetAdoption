@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-color: rgb(253, 241, 223); 
+            }
+            
+            .navbar {
+            overflow: hidden;
+            }
+            
+            .navbar img {
+            float: left;
+            height: 18rem;
+            width: 18rem;
+            position: absolute;
+            margin-top: -4rem;
+            margin-left: -4rem;
+            }
+
+            .navbar a {
+            float: right;
+            font-size: 19px;
+            color: black;
+            text-align: center;
+            padding: 50px 30px;
+            text-decoration: none;
+            }
+            
+            .subnav {
+            float: right;
+            overflow: hidden;
+            }
+            
+            .subnav .subnavbtn {
+            font-size: 19px;  
+            border: none;
+            outline: none;
+            color: black;
+            padding: 50px 30px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            }
+            
+            .navbar a:hover, .subnav:hover .subnavbtn {
+            background-color: transparent;
+            }
+            
+            .subnav-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color:#ffaa3b;
+            opacity: 0.5;
+            width: 100%;
+            z-index: 1;
+            }
+            
+            .subnav-content a {
+            float: right;
+            color:black;
+           font-weight: 600;
+            /* text-decoration:none; */
+            }
+            
+            .subnav-content a:hover {
+            background-color: #fbec1c;
+            color: black;
+            
+            
+            }
+            
+            .subnav:hover .subnav-content {
+            display: block;
+            }
+
+            .h1 img{
+            float:right;
+            margin-top: -4rem; 
+            }
+
+            .h1 h1{
+            color:#9A4D00;
+            margin-top: 5rem; 
+            margin-left: 12rem;
+            font-weight: 5rem;
+            font-size: 4rem;
+            }
+
+            .h1 p{
+            font-size: 1.5rem;
+            margin-top: -1.5rem;
+            margin-left: 12rem;
+            font-weight: 600;
+            }
+
+            .h1 button{
+            width: 9rem;
+            height: 5rem;
+            float:right;
+            /* margin-top: 6rem; */
+            margin-right: 7rem;
+            color:white;
+            border:0;
+            border-radius: 1rem;
+            font-size:2rem;
+            }
+
+            .about img{
+              margin-top: 1rem;
+              width:750px;
+              height:550px;
+              margin-left: 36rem;
+            }
+
+            .abouttext{
+              margin-left: 5rem;
+              margin-top: -32rem;
+              text-align: justify;
+              padding-right: 28rem;
+              padding-left: 7rem;
+            }
+
+            .abouttext h1{
+              font-size: 4rem;
+            }
+
+            .abouttext p{
+              font-size: 1.3rem;
+              font-weight: 600;
+            }
+
+            .search{
+              margin-top: 7rem;
+              background-color:#ffaa3b;
+              opacity: 0.9;
+            }
+
+            .search h2{
+              padding-top: 1rem;
+              margin-left: 9rem;
+              padding-bottom: 2rem;
+              text-align: left; 
+              font-size: 2.5rem;
+              color: white;              
+            }
+          
+            .search form{
+              margin-top: -7rem;
+              margin-left: 45rem;
+              padding-bottom: 1rem;
+            } 
+
+            .search select{
+              width: 9rem;
+              height:3rem;
+              background-color: white;
+            }
+
+            .search input{
+              width:9rem;
+              height:3rem;
+              background-color: #CE5501;
+              border:0;
+              font-size: 1rem;
+              font-weight: 600;
+              color:white;
+            }
+
+            .how h2{
+              font-size: 4rem;
+              margin-left: 32rem;
+            }
+
+            .how img{
+              margin-top: -6rem; 
+              margin-left: 2rem;
+              width:30%;
+            }
+
+            .p1{
+              margin-top: -2rem ;
+              margin-left: 6rem;
+            }
+
+            .p2{
+              margin-top: -2rem ;
+              margin-left: 30rem;
+            }
+
+            .p3{
+              margin-top: -3.25rem ;
+              margin-left: 60rem;
+            }
+
+            .container{
+            max-width: 1170px;
+            margin:auto;
+          }
+          .row{
+            display: flex;
+            flex-wrap: wrap;
+          }
+          ul{
+            list-style: none;
+          }
+         .footer{
+          background-color: #FAD5A5;
+            padding: 10px 0;
+            border-radius: 75% 75% 0 0 / 25%;
+        }
+        .footer-col{
+          width: 25%;
+          padding: 0 30px;
+        }
+        .footer-col h4{
+          font-size: 18px;
+          color: black;
+          text-transform: capitalize;
+          margin-bottom: 35px;
+          font-weight: 500;
+          position: relative;
+        }
+        .footer-col h4::before{
+          content: '';
+          position: absolute;
+          left:0;
+          bottom: -10px;
+          background-color: #e91e63;
+          height: 2px;
+          box-sizing: border-box;
+          width: 75px;
+        }
+        .footer-col ul li:not(:last-child){
+          margin-bottom: 10px;
+        }
+        .footer-col ul li a{
+          font-size: 16px;
+          text-transform: capitalize;
+          color: #ffffff;
+          text-decoration: none;
+          font-weight: 600;
+          color: black;
+          display: block;
+          transition: all 0.3s ease;
+        }
+        .footer-col ul li a:hover{
+          color: #251b1b;
+          padding-left: 8px;
+        }
+       
+        @media(max-width: 767px){
+          .footer-col{
+            width: 50%;
+            margin-bottom: 30px;
+        }
+        }
+        @media(max-width: 574px){
+          .footer-col{
+            width: 100%;
+        }
+        }
+
+
+
+        </style>
+    </head>
+    <body>
+    
+    <div class="navbar">
+      <!-- <img th:src="@{/logo.png}"></img> -->
+      <img th:src="@{/logo.png}"></img>
+      <a th:href="@{/FurryPal/donate}" style="color:#FF9205;">Donate</a>
+      <a th:href="@{/FurryPal/contact}">Contact</a>
+      <a th:href="@{/FurryPal/blog}">Blog</a>
+      <a th:href="@{/FurryPal/buttonb4register}">Register pet</a>
+      <div class="subnav">
+        <button class="subnavbtn">Services <i class="fa fa-caret-down"></i></button>
+        <div class="subnav-content">
+          <a th:href="@{/FurryPal/petwatching}">Pet Watching</a>
+          <a th:href="@{/FurryPal/grooming}">Grooming</a>
+          <a th:href="@{/FurryPal/training}">Training</a>
+          <a th:href="@{/FurryPal/vet}">Vet</a>
+        </div>
+      </div> 
+      <div class="subnav">
+        <button class="subnavbtn">Categories <i class="fa fa-caret-down"></i></button>
+        <div class="subnav-content">
+          <a th:href="@{/FurryPal/cat}">Cat</a>
+          <a th:href="@{/FurryPal/dog}">Dog</a>
+        </div>
+      </div>
+      <a th:href="@{/FurryPal/home}">Home</a>
+    </div>
+        
+    <div class="h1">
+      <img th:src="@{/h1img.png}"></img>
+      <h1>Where love meets four paws</h1>
+      <p>Adopting a pet is not just about saving a life, it's about starting a new 
+         chapter with a loyal companion by your side.</p>
+      <!-- <button style="background-color:#FF9205;">FOSTER</button>  
+      <button style="background-color:#FDD400;">ADOPT</button> -->
+    </div>
+
+    <div class="about">
+      <img th:src="@{/catdog.png}"></img>
+      <div class="abouttext">
+      <h1>About FurryPal</h1>
+      <p>
+        The FurryPal Animal Rescue was founded in 2015 by a group of </br> </br>
+        dedicated animal lovers who saw a need for a local organization </br> </br>
+        that could provide care and support for homeless and neglected </br> </br>
+        pets. Our mission is simple: to save as many animals as possible</br> </br>
+        and find them loving, permanent homes.
+        </br> </br> </br>
+        Together, we are dedicated to ending animal homelessness and </br> </br>
+        promoting the human-animal bond. 
+      </p>
+      </div>
+    </div>
+
+    <!-- <div class="search">
+      <h2>Find the Purrfect Pet for You </h2>
+      <form>
+        <select name="type" id="type" >
+          <option value="none">Animal</option>
+          <option value="dog">Dog</option>
+          <option value="Cat">Cat</option>
+        </select>
+        <select name="location" id="location">
+          <option value="none">Location</option>
+          <option value="delhi">Delhi</option>
+          <option value="mumbai">Mumbai</option>
+          <option value="pune">Pune</option>
+          <option value="hyderabad">Hyderabad</option>
+        </select>
+        <input type="submit" value="Search"/>
+      </form>
+    </div> -->
+
+    <div class="how">
+      <h2>How it works</h2>
+      <img th:src="@{/c1.png}"></img>
+      <img th:src="@{/c2.png}"></img>
+      <img th:src="@{/c3.png}"></img>
+      <p class="p1">Adopt a dog or cat who's right for you.</p>
+      <p class="p2">Once you find a pet, click adopt and fill the adoption  <br>
+        form, our team will approve your reuqest if you meet our criteria</p>
+      <p class="p3">We will contact you on your phone or mail.</p>
+    </div>
+
+    <footer>
+      <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="footer-col">
+              <h4>Rescue, Love, Repeat</h4>
+              <ul>
+                <li><a th:href="@{/FurryPal/survey}">Find Your Best Fit</a></li>
+                <li><a th:href="@{/FurryPal/dog}">Dog</a></li>
+                <li><a th:href="@{/FurryPal/cat}">Cat</a></li>
+                 
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Services</h4>
+              <ul>
+                <li><a th:href="@{/FurryPal/petwatching}">Pet Watching</a></li>
+                <li><a th:href="@{/FurryPal/vet}">Pet Veterinary</a></li>
+                <li><a th:href="@{/FurryPal/training}">Pet Training</a></li>
+                <li><a th:href="@{/FurryPal/grooming}">Pet Grooming</a></li>
+                
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Support</h4>
+              <ul>
+                <li><a th:href="@{/FurryPal/home}">Home</a></li>
+                <li><a th:href="@{/FurryPal/contact}">Contact</a></li>
+                <li><a th:href="@{/FurryPal/blog}">Blog</a></li>
+                 <li><a th:href="@{/FurryPal/donate}">Donate</a></li>
+               
+              </ul>
+            </div>
+            
+    </footer>
+
+</body>
+</html>

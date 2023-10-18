@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+     <style>
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-color: rgb(253, 241, 223); 
+            }
+            
+            .navbar {
+            overflow: hidden;
+            }
+            
+            .navbar img {
+            float: left;
+            height: 18rem;
+            width: 18rem;
+            position: absolute;
+            margin-top: -4rem;
+            margin-left: -4rem;
+            }
+
+            .navbar a {
+            float: right;
+            font-size: 19px;
+            color: black;
+            text-align: center;
+            padding: 50px 30px;
+            text-decoration: none;
+            }
+            
+            .subnav {
+            float: right;
+            overflow: hidden;
+            }
+            
+            .subnav .subnavbtn {
+            font-size: 19px;  
+            border: none;
+            outline: none;
+            color: black;
+            padding: 50px 30px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            }
+            
+            .navbar a:hover, .subnav:hover .subnavbtn {
+            background-color: #fdaf49;
+            }
+            
+            .subnav-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #fdaf49;
+            opacity: 0.6;
+            width: 100%;
+            z-index: 1;
+            }
+            
+            .subnav-content a {
+            float: right;
+            color: black;
+            text-decoration: none;
+            }
+            
+            .subnav-content a:hover {
+            background-color: #fbec1c;
+            color: black;
+            }
+            
+            .subnav:hover .subnav-content {
+            display: block;
+            }
+            
+            .first img{
+              width:450px; 
+              height: 350px;
+              margin-left: 5rem;
+            }
+
+            .first h1{
+              color:palevioletred;
+              font-size: 4rem;
+              margin-top: -12rem;
+              margin-left: 40rem;
+            }
+
+            .second img{
+              height: 320px;
+              width: 500px;
+              padding-left: 5rem;
+              margin-bottom: 15rem;
+            }
+
+            .second h2{
+              margin-top: 10rem;
+              margin-left: 28rem;
+              font-size: 4rem;
+            }
+
+            .second p{
+              margin-top: -32rem;
+              margin-right: 10rem;
+              margin-left: 40rem;
+              font-size: 1.5rem;
+              text-align: justify;
+              padding-right: 2rem;
+            }
+            #properties {
+        width: 25%;
+         margin-top: 20px;
+}
+
+#properties h2 {
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+     margin-top: 5rem;
+    margin-left: 2rem;
+
+}
+
+#properties .content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 100%;
+    
+}
+
+#properties .content .box {
+    flex: 1;
+    min-width: 270px;
+    min-height: 100px;
+    
+    overflow: hidden;
+    margin: 15px;
+    padding: 15px;
+    box-shadow: 4px 5px 10px #acabab;
+    border-radius: 12px;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+#properties .content .box img {
+    width: 100%;
+    height: 220px;
+    display: block;
+    object-fit: cover;
+}
+
+#properties .content .box h3 {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 10px;
+}
+
+#properties .content .box span {
+    color: rgb(185, 71, 26);
+    font-weight: 600;
+    padding-right: 10px;
+    margin-left: 5rem;
+}
+
+#properties .content .box p {
+    line-height: 1.4;
+    margin: 5px 0;
+    font-weight: 600;
+    margin-left: 5rem;
+}
+
+#properties .content .box a {
+    text-decoration: none;
+    color: beige;
+    background: #c50f0f;
+    display: block;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    text-transform: uppercase;
+    margin: 15px;
+}
+
+          
+
+            .third h2{
+              /* margin-top: 11rem; */
+              margin-left: 22rem;
+              font-size: 4rem;
+            }
+
+            .third .box-container{
+              display: grid;
+              margin-left: 1.2rem;
+              
+              grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+              gap:1.5rem;
+            }
+
+            .third .box-container .box{
+                border:.1rem solid black;    
+            }
+
+            .third .box-container .box .image{
+                height: 15rem;
+                overflow:hidden;
+                width: 100%;
+            }
+
+            .third .box-container .box .image img{
+                height: 100%;
+                /* object-fit: cover; */
+                width: 100%;
+            }
+
+            .third .box-container .box .content{
+                padding:2rem;
+            }
+
+            .third .box-container .box .content .title{
+                font-size: 1.3rem;
+                font-weight:500;
+                line-height: 1.5;
+                color:black;
+            }
+
+            .third .box-container .box .content .title:hover{
+                color:var(--main-color);
+            }
+
+            .third .box-container .box .content span{
+                color:var(--main-color);
+                display: block;
+                padding-top: 1rem;
+                font-size: 1rem;
+            }
+
+            .third .box-container .box .content p{
+                font-size: 1.2rem;
+                line-height: 1.8;
+                color:rgb(19, 15, 15);
+                padding:1rem 0;
+            }
+            .third .box-container .btn{
+                font-size: 1rem;
+                width:8rem;
+                height:3rem;
+                background-color:bisque;
+                border-style: none;
+            }
+
+            .ftext{
+            font-size: 1.5rem;
+            margin-top: 5rem;
+            margin-left: 6rem;
+           }  
+        
+            details{
+          
+            color: black;
+              margin-left: 5rem;   
+              margin-top: 2rem;      
+              font-size: 1.5rem;
+            }
+
+            summary {
+            padding: .5em 1.3rem;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;  
+            transition: height 1s ease;
+            }
+
+            summary::-webkit-details-marker {
+            display: none;
+            }
+
+            summary:after{
+            content: "\002B";
+            }
+
+            details[open] summary {
+                border-bottom: 1px solid rgb(255, 255, 255);
+                margin-bottom: .5em;
+            }
+
+            details[open] summary:after{
+            content: "\00D7";
+            }
+
+            details[open] div{
+            padding: .3em 1em;
+            }
+
+            .container{
+            max-width: 1170px;
+            margin:auto;
+          }
+          .row{
+            display: flex;
+            flex-wrap: wrap;
+          }
+          ul{
+            list-style: none;
+          }
+         .footer{
+          background-color: #FAD5A5;
+            padding: 10px 0;
+            border-radius: 75% 75% 0 0 / 25%;
+        }
+        .footer-col{
+          width: 25%;
+          padding: 0 30px;
+        }
+        .footer-col h4{
+          font-size: 18px;
+          color: black;
+          text-transform: capitalize;
+          margin-bottom: 35px;
+          font-weight: 500;
+          position: relative;
+        }
+        .footer-col h4::before{
+          content: '';
+          position: absolute;
+          left:0;
+          bottom: -10px;
+          background-color: #e91e63;
+          height: 2px;
+          box-sizing: border-box;
+          width: 75px;
+        }
+        .footer-col ul li:not(:last-child){
+          margin-bottom: 10px;
+        }
+        .footer-col ul li a{
+          font-size: 16px;
+          text-transform: capitalize;
+          color: #ffffff;
+          text-decoration: none;
+          font-weight: 600;
+          color: black;
+          display: block;
+          transition: all 0.3s ease;
+        }
+        .footer-col ul li a:hover{
+          color: #251b1b;
+          padding-left: 8px;
+        }
+       
+        @media(max-width: 767px){
+          .footer-col{
+            width: 50%;
+            margin-bottom: 30px;
+        }
+        }
+        @media(max-width: 574px){
+          .footer-col{
+            width: 100%;
+        }
+        }
+
+        </style>
+    </head>
+    <body>
+    
+      <div class="navbar">
+        <!-- <img th:src="@{/logo.png}"></img> -->
+        <img th:src="@{/logo.png}"></img>
+        <a th:href="@{/FurryPal/donate}" style="color:#FF9205;">Donate</a>
+        <a th:href="@{/FurryPal/contact}">Contact</a>
+        <a th:href="@{/FurryPal/blog}">Blog</a>
+        <a th:href="@{/FurryPal/buttonb4register}">Register pet</a>
+        <div class="subnav">
+          <button class="subnavbtn">Services <i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <a th:href="@{/FurryPal/petwatching}">Pet Watching</a>
+            <a th:href="@{/FurryPal/grooming}">Grooming</a>
+            <a th:href="@{/FurryPal/training}">Training</a>
+            <a th:href="@{/FurryPal/vet}">Vet</a>
+          </div>
+        </div> 
+        <div class="subnav">
+          <button class="subnavbtn">Categories <i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <a th:href="@{/FurryPal/cat}">Cat</a>
+            <a th:href="@{/FurryPal/dog}">Dog</a>
+          </div>
+        </div>
+        <a th:href="@{/FurryPal/home}">Home</a>
+      </div>
+        
+    <div class="first">
+      <img th:src="@{/vbkg.png}"></img>
+      <h1>PET WATCHING</h1>
+    </div>
+
+    <div class="second">
+      <h2>How this works</h2>
+      <img th:src="@{/t2dog.jpg}"></img>
+      <p>Use our search feature to find pet watchers near you </br> </br>
+        Go through the multiple pet watchers available </br> </br>
+        Choose the most suitable one for you and leave 
+        them a message and wait for them to get back to 
+        you via text message </br> </br>
+        With our reference 20% of your fee will 
+        be donated to rescue some needy furry pals</p>
+    </div>
+
+    <!-- <div class="search">
+      <h2>Find the Purrfect Pet Watcher </h2>
+      <form>
+        <select name="type" id="type" >
+          <option value="none">Animal</option>
+          <option value="dog">Dog</option>
+          <option value="Cat">Cat</option>
+        </select>
+        <select name="location" id="location">
+          <option value="none">Location</option>
+          <option value="delhi">Delhi</option>
+          <option value="mumbai">Mumbai</option>
+          <option value="pune">Pune</option>
+          <option value="hyderabad">Hyderabad</option>
+        </select>
+        <input type="submit" value="Search"/>
+      </form>
+    </div> -->
+
+    <div id="properties">
+      <h2>Pet Watching Services</h2> 
+      <div class="content">
+        <div th:each="service : ${services}" class="box">
+          <!-- <img th:src="@{${pets.getPhotosImagePath()}}"> -->
+          <div class="text">
+            <!-- <h3 th:text="${pets.name}">Dog 1</h3>
+            <span th:text="${pets.type}"></span> -->
+            <!-- <p th:text="${record.location}"></p> -->
+            <div class="details">
+              <span th:text="${service.name}">Service Name</span>
+              <p>Phone no</p>
+              <span th:text="${service.phone_no}"></span>
+              <p>Location</p>
+              <span th:text="${service.location}"></span>
+              <p>Qualification</p>
+              <!-- <span th:text="${service.description}"></span> -->
+              <span th:text="${service.qualification}"></span>
+              <p>Experience</p>
+              <span th:text="${service.experience}"></span>
+              <!-- <span th:text="${pets.size}"></span>
+              <span th:text="${pets.vaccination}"></span> -->
+            </div>
+            <!-- <a href="#" th:href="">Adopt</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <section class="third">
+      <h2>Meet Our Pet Watchers</h2>
+      <div class="box-container">
+        <div class="box">
+        <div class="image">
+            <img th:src="@{/dr1.jpg}" alt="">
+        </div>
+        <div class="content">
+            <a href="#" class="title">Dr. Rahul Verma</a>
+            <p>
+              B.V.Sc & A.H, M.V.Sc Veterinary Surgery & Radiology, PhD. Scholar </br>
+              6+ years of professional experience </br>
+              +91 8309786954
+              Panvel, Mumbai
+            </p>
+            <button class="btn"><a>Get help</a></button>
+        </div>
+        </div>
+        <div class="box">
+          <div class="image">
+              <img th:src="@{/dr2.jpg}" alt="">
+          </div>
+          <div class="content">
+              <a href="#" class="title">Dr. Ali Ahmed</a>
+              <p>
+                B.V.Sc </br>
+                3+ years of professional experience </br>
+                +91 2309786954 </br>
+                Bandra, Mumbai
+              </p>
+              <button class="btn"><a>Get help</a></button>
+          </div>
+          </div>
+          <div class="box">
+            <div class="image">
+                <img th:src="@{/dr3.jpg}" alt="">
+            </div>
+            <div class="content">
+                <a href="#" class="title">Dr. Karan Singh</a>
+                <p>
+                  B.V.Sc & A.H, PhD. Scholar </br>
+                  4+ years of professional experience </br>
+                  +91 7309786954 </br>
+                  Kothrud, Pune
+                </p>
+                <button class="btn"><a>Get help</a></button>
+            </div>
+            </div>
+            
+      </div>
+    </section>
+
+    <section class="third">
+      </br>
+      <div class="box-container">
+        <div class="box">
+          <div class="image">
+              <img th:src="@{/dr5.jpg}" alt="">
+          </div>
+          <div class="content">
+              <a href="#" class="title">Dr. Ravi Chopra</a>
+              <p>
+                B.V.Sc </br>
+                3+ years of professional experience </br>
+                +91 2309786954 </br>
+                Bandra, Mumbai
+              </p>
+              <button class="btn"><a>Get help</a></button>
+          </div>
+          </div>
+          <div class="box">
+            <div class="image">
+                <img th:src="@{/dr6.jpg}" alt="">
+            </div>
+            <div class="content">
+                <a href="#" class="title">Dr. Yousef Mohammad</a>
+                <p>
+                  B.V.Sc & A.H, PhD. Scholar </br>
+                  4+ years of professional experience </br>
+                  +91 7309786954 </br>
+                  Kothrud, Pune
+                </p>
+                <button class="btn"><a>Get help</a></button>
+            </div>
+            </div>
+            <div class="box">
+              <div class="image">
+                  <img th:src="@{/dr4.jpg}" alt="">
+              </div>
+              <div class="content">
+                  <a href="#" class="title">Dr. Siddhi Shah</a>
+                  <p>
+                    B.V.Sc & A.H </br>
+                    2+ years of professional experience </br>
+                    +91 9309786954 </br>
+                    Hyderabad
+                  </p>
+                  <button class="btn"><a>Get help</a></button>
+              </div>
+              </div>
+      </div>
+    </section> -->
+
+    <section class="FAQ">
+      <div class="ftext"> <h3>Frequently Asked Questions</h3> </div>
+      <div class="faq">
+          
+          <details>
+          <summary>Why should I choose these trainers?</summary>
+          <div>
+         <P>
+          We partner with the best trainers in the city to provide your furry pals with the most comfortable service.
+          Moreover by choosing these vets you will be able to contribute 20% of your fee to help needy furry pals.
+         </P>
+          </div>
+        </details>
+        <details>
+          <summary>How do I connect to the trainer?</summary>
+          <div>
+         <P>
+          Choose the trainer that meets your preference then click on the get help button under the trainer's profile, 
+          this will lead you to a message box, fill in the required details and send the message, the trainer will review
+          your case and connect to you as soon as possible.
+         </P>
+          </div>
+        </details>
+        <details>
+          <summary>How much do the trainer charge?</summary>
+          <div>
+         <P>
+          The fees can only be revealed by the trainer, and is in no way declared by Furry Pals Organization.
+         </P>
+          </div>
+        </details>
+        <details>
+          <summary>Do we have to go to the training center or they provide home visit</summary>
+          <div>
+         <P>
+          Furry Pals Organization does not deal with this, please clear this with the trainer themselve.
+         </P>
+          </div>
+        </details>
+        </div>
+       </section>
+
+       <footer>
+        <footer class="footer">
+          <div class="container">
+            <div class="row">
+              <div class="footer-col">
+                <h4>Rescue, Love, Repeat</h4>
+                <ul>
+                  <li><a th:href="@{/FurryPal/survey}">Find Your Best Fit</a></li>
+                  <li><a th:href="@{/FurryPal/dog}">Dog</a></li>
+                  <li><a th:href="@{/FurryPal/cat}">Cat</a></li>
+                   
+                </ul>
+              </div>
+              <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                  <li><a th:href="@{/FurryPal/petwatching}">Pet Watching</a></li>
+                  <li><a th:href="@{/FurryPal/vet}">Pet Veterinary</a></li>
+                  <li><a th:href="@{/FurryPal/training}">Pet Training</a></li>
+                  <li><a th:href="@{/FurryPal/grooming}">Pet Grooming</a></li>
+                  
+                </ul>
+              </div>
+              <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                  <li><a th:href="@{/FurryPal/home}">Home</a></li>
+                  <li><a th:href="@{/FurryPal/contact}">Contact</a></li>
+                  <li><a th:href="@{/FurryPal/blog}">Blog</a></li>
+                   <li><a th:href="@{/FurryPal/donate}">Donate</a></li>
+                 
+                </ul>
+              </div>
+              
+      </footer>
+
+</body>
+</html>

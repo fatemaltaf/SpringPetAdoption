@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-color: rgb(253, 241, 223); 
+            }
+            
+            .navbar {
+            overflow: hidden;
+            }
+            
+            .navbar img {
+            float: left;
+            height: 18rem;
+            width: 18rem;
+            position: absolute;
+            margin-top: -4rem;
+            margin-left: -4rem;
+            }
+
+            .navbar a {
+            float: right;
+            font-size: 19px;
+            color: black;
+            text-align: center;
+            padding: 50px 30px;
+            text-decoration: none;
+            }
+            
+            .subnav {
+            float: right;
+            overflow: hidden;
+            }
+            
+            .subnav .subnavbtn {
+            font-size: 19px;  
+            border: none;
+            outline: none;
+            color: black;
+            padding: 50px 30px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            }
+            
+            .navbar a:hover, .subnav:hover .subnavbtn {
+            background-color: #fdaf49;
+            }
+            
+            .subnav-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #fdaf49;
+            opacity: 0.6;
+            width: 100%;
+            z-index: 1;
+            }
+            
+            .subnav-content a {
+            float: right;
+            color: black;
+            text-decoration: none;
+            }
+            
+            .subnav-content a:hover {
+            background-color: #fbec1c;
+            color: black;
+            }
+            
+            .subnav:hover .subnav-content {
+            display: block;
+            }
+
+            .blogs .heading{
+                margin-left: 13.5rem;
+                margin-top: 3rem;
+                font-size: 3rem;
+                color:orange;
+            }
+            
+            .blogs .box-container{
+                display: grid;
+                margin-left: 1.2rem;
+                
+                grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+                gap:1.5rem;
+            }
+
+            .blogs .box-container .box{
+                border:.1rem solid black;    
+            }
+
+            .blogs .box-container .box .image{
+                height: 15rem;
+                overflow:hidden;
+                width: 100%;
+            }
+
+            .blogs .box-container .box .image img{
+                height: 100%;
+                object-fit: cover;
+                width: 100%;
+            }
+
+            .blogs .box-container .box:hover .image img{
+                transform: scale(1.2);
+            }
+
+            .blogs .box-container .box .content{
+                padding:2rem;
+            }
+
+            .blogs .box-container .box .content .title{
+                font-size: 1.3rem;
+                font-weight:500;
+                line-height: 1.5;
+                color:black;
+            }
+
+            .blogs .box-container .box .content .title:hover{
+                color:var(--main-color);
+            }
+
+            .blogs .box-container .box .content span{
+                color:var(--main-color);
+                display: block;
+                padding-top: 1rem;
+                font-size: 1rem;
+            }
+
+            .blogs .box-container .box .content p{
+                font-size: 1.5rem;
+                line-height: 1.8;
+                color:rgb(19, 15, 15);
+                padding:1rem 0;
+            }
+            .box-container .btn{
+                font-size: 1rem;
+            }
+            .ftext{
+                font-size: 1.5rem;
+                margin-top: 5rem;
+                margin-left: 6rem;
+            }
+
+            details{
+        
+            color: black;
+            margin-left: 5rem;   
+            margin-top: 2rem;      
+            font-size: 1.5rem;
+            }
+
+            summary {
+            padding: .5em 1.3rem;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;  
+            transition: height 1s ease;
+            }
+
+            summary::-webkit-details-marker {
+            display: none;
+            }
+
+            summary:after{
+            content: "\002B";
+            }
+
+            details[open] summary {
+                border-bottom: 1px solid rgb(255, 255, 255);
+                margin-bottom: .5em;
+            }
+
+            details[open] summary:after{
+            content: "\00D7";
+            }
+
+            details[open] div{
+            padding: .3em 1em;
+            }
+
+            .container{
+            max-width: 1170px;
+            margin:auto;
+          }
+          .row{
+            display: flex;
+            flex-wrap: wrap;
+          }
+          ul{
+            list-style: none;
+          }
+         .footer{
+          background-color: #FAD5A5;
+            padding: 10px 0;
+            border-radius: 75% 75% 0 0 / 25%;
+        }
+        .footer-col{
+          width: 25%;
+          padding: 0 30px;
+        }
+        .footer-col h4{
+          font-size: 18px;
+          color: black;
+          text-transform: capitalize;
+          margin-bottom: 35px;
+          font-weight: 500;
+          position: relative;
+        }
+        .footer-col h4::before{
+          content: '';
+          position: absolute;
+          left:0;
+          bottom: -10px;
+          background-color: #e91e63;
+          height: 2px;
+          box-sizing: border-box;
+          width: 75px;
+        }
+        .footer-col ul li:not(:last-child){
+          margin-bottom: 10px;
+        }
+        .footer-col ul li a{
+          font-size: 16px;
+          text-transform: capitalize;
+          color: #ffffff;
+          text-decoration: none;
+          font-weight: 600;
+          color: black;
+          display: block;
+          transition: all 0.3s ease;
+        }
+        .footer-col ul li a:hover{
+          color: #251b1b;
+          padding-left: 8px;
+        }
+       
+        @media(max-width: 767px){
+          .footer-col{
+            width: 50%;
+            margin-bottom: 30px;
+        }
+        }
+        @media(max-width: 574px){
+          .footer-col{
+            width: 100%;
+        }
+        }
+
+        </style>
+    </head>
+    <body>
+    
+      <div class="navbar">
+        <!-- <img th:src="@{/logo.png}"></img> -->
+        <img th:src="@{/logo.png}"></img>
+        <a th:href="@{/FurryPal/donate}" style="color:#FF9205;">Donate</a>
+        <a th:href="@{/FurryPal/contact}">Contact</a>
+        <a th:href="@{/FurryPal/blog}">Blog</a>
+        <a th:href="@{/FurryPal/buttonb4register}">Register pet</a>
+        <div class="subnav">
+          <button class="subnavbtn">Services <i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <a th:href="@{/FurryPal/petwatching}">Pet Watching</a>
+            <a th:href="@{/FurryPal/grooming}">Grooming</a>
+            <a th:href="@{/FurryPal/training}">Training</a>
+            <a th:href="@{/FurryPal/vet}">Vet</a>
+          </div>
+        </div> 
+        <div class="subnav">
+          <button class="subnavbtn">Categories <i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <a th:href="@{/FurryPal/cat}">Cat</a>
+            <a th:href="@{/FurryPal/dog}">Dog</a>
+          </div>
+        </div>
+        <a th:href="@{/FurryPal/home}">Home</a>
+      </div>
+    </div>
+        
+    <section class="blogs" id="blogs">
+        
+        <h1 class="heading">SOME TIPS TO FRIEND YOUR FURRY PAL</h1>
+
+        <div class="box-container">
+                <div class="box">
+                <div class="image">
+                    <img th:src="@{/g2dog.jpg}" alt="">
+                </div>
+                <div class="content">
+                    <a href="#" class="title">Top 10 Benefits Of Pet Grooming: Dogs & Cats</a>
+                    <!-- <span>by admin / 21st may, 2021</span> -->
+                    <p>
+                        Pet grooming is more than just a way to keep your furry friend looking good – it has numerous benefits
+                        for their overall health and well-being. Here are the top 10 benefits of pet grooming: Improve...
+                    </p>
+                    <a href="https://thepetnest.com/blog/top-10-benefits-of-pet-grooming-for-dogs-and-cats" class="btn">read more</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img th:src="@{/b1.jpg}" alt="">
+                </div>
+                <div class="content">
+                    <a href="#" class="title">Male Dogs vs Female Dogs: Which is perfect for the family?</a>
+                    <!-- <span>by admin / 21st may, 2021</span> -->
+                    <p>Deciding whether to get a male or female dog is a personal decision that depends on your individual circumstances
+                        and preferences. Here are some factors to consider when deciding between male and f...</p></br>
+                    <a href="https://thepetnest.com/blog/male-dogs-vs-female-dogs-which-is-perfect-for-the-family" class="btn">read more</a>
+
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img th:src="@{/b2.jpg}" alt="">
+                </div>
+                <div class="content">
+                    <a href="#" class="title">How Do Pets Choose Their Favorite Person?</a>
+                    <!-- <span>by admin / 21st may, 2021</span> -->
+                    <p>
+                        Pets have a special bond with their owners and often form a strong attachment to one particular person in the 
+                        household. But how do they choose their favorite person? In this blog post, we will ex...
+                    </p></br>
+                    <a href="https://thepetnest.com/blog/how-do-pets-choose-their-favourite-person" class="btn">read more</a>
+                </div>
+            </div>
+
+        </div>
+ 
+
+    </section>
+    <section class="blogs" id="blogs">
+        </br> </br>
+        <div class="box-container">
+                <div class="box">
+                <div class="image">
+                    <img th:src="@{/b3.jpg}" alt="">
+                </div>
+                <div class="content">
+                    <a href="#" class="title">The new pet checklist: Essentials for new cat & dog parents</a>
+                    <p>Bringing a new pet into your home is an exciting and rewarding experience, but it can also
+                        be overwhelming. To make the transition as smooth as possible, it's important to be prepared and have all ...
+                    </p>
+                    <a href="https://thepetnest.com/blog/the-new-pet-checklist-essentials-for-new-cat-and-dog-parents" class="btn">read more</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img th:src="@{/Vcat.jpg}" alt="">
+                </div>
+                <div class="content">
+                    <a href="#" class="title">Regular Vet Check-Ups: Why They're Essential For Your Pet's Well-Being</a>
+                    <p>Regular vet check-ups are an essential part of pet ownership. Not only do they help to ensure 
+                        that your pet is healthy, but they also help to catch any potential issues early on. In this listicle, ...
+                    </p></br>
+                    <a href="https://thepetnest.com/blog/regular-vet-check-ups" class="btn">read more</a>
+
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="image">
+                    <img th:src="@{/t2.jpg}" alt="">
+                </div>
+                <div class="content">
+                    <a href="#" class="title">Top 5 Benefits of Adopting A Rescue Pet</a>
+                    <p>Adopting a rescue pet can bring countless benefits to both the animal and the new owner. 
+                        Here are just a few of the many reasons why adopting a rescue pet is a great idea: Saving A Life: By adopti...
+                    </p></br>
+                    <a href="https://thepetnest.com/blog/top-5-benefits-of-adopting-a-rescue-pet" class="btn">read more</a>
+                </div>
+            </div>
+
+        </div>
+ 
+
+    </section>
+
+    <footer>
+        <footer class="footer">
+          <div class="container">
+            <div class="row">
+              <div class="footer-col">
+                <h4>Rescue, Love, Repeat</h4>
+                <ul>
+                  <li><a th:href="@{/FurryPal/survey}">Find Your Best Fit</a></li>
+                  <li><a th:href="@{/FurryPal/dog}">Dog</a></li>
+                  <li><a th:href="@{/FurryPal/cat}">Cat</a></li>
+                   
+                </ul>
+              </div>
+              <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                  <li><a th:href="@{/FurryPal/petwatching}">Pet Watching</a></li>
+                  <li><a th:href="@{/FurryPal/vet}">Pet Veterinary</a></li>
+                  <li><a th:href="@{/FurryPal/training}">Pet Training</a></li>
+                  <li><a th:href="@{/FurryPal/grooming}">Pet Grooming</a></li>
+                  
+                </ul>
+              </div>
+              <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                  <li><a th:href="@{/FurryPal/home}">Home</a></li>
+                  <li><a th:href="@{/FurryPal/contact}">Contact</a></li>
+                  <li><a th:href="@{/FurryPal/blog}">Blog</a></li>
+                   <li><a th:href="@{/FurryPal/donate}">Donate</a></li>
+                 
+                </ul>
+              </div>
+              
+      </footer>
+
+</body>
+</html>

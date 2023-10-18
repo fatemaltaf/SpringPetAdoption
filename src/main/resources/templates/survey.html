@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+     <style>
+            body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-color: rgb(253, 241, 223); 
+            }
+            
+            .navbar {
+            overflow: hidden;
+            }
+            
+            .navbar img {
+            float: left;
+            height: 18rem;
+            width: 18rem;
+            position: absolute;
+            margin-top: -4rem;
+            margin-left: -4rem;
+            }
+
+            .navbar a {
+            float: right;
+            font-size: 19px;
+            color: black;
+            text-align: center;
+            padding: 50px 30px;
+            text-decoration: none;
+            }
+            
+            .subnav {
+            float: right;
+            overflow: hidden;
+            }
+            
+            .subnav .subnavbtn {
+            font-size: 19px;  
+            border: none;
+            outline: none;
+            color: black;
+            padding: 50px 30px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+            }
+            
+            .navbar a:hover, .subnav:hover .subnavbtn {
+            background-color: #fdaf49;
+            }
+            
+            .subnav-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #fdaf49;
+            opacity: 0.6;
+            width: 100%;
+            z-index: 1;
+            }
+            
+            .subnav-content a {
+            float: right;
+            color: black;
+            text-decoration: none;
+            }
+            
+            .subnav-content a:hover {
+            background-color: #fbec1c;
+            color: black;
+            }
+            
+            .subnav:hover .subnav-content {
+            display: block;
+            }
+            
+            .main-content img{
+                display: flex;
+                float: right;
+                margin-top: -12.5rem;
+            }
+            .tag-line{
+              font-family: 'Poppins', sans-serif;  
+              font-size: 40px; 
+              font-weight: 600;
+              margin-left: 5rem;
+              margin-top: 15rem;
+              
+            }
+            .thankyou{
+                font-family: 'Poppins', sans-serif;  
+                font-size: 18px; 
+              font-weight: 600;
+              margin-left: 10rem; 
+              margin-top: 16rem;
+            }
+            .form-group{
+                font-family: 'Poppins', sans-serif; 
+                font-weight: 600;
+                margin-left: 10rem; 
+               
+                position: relative;
+                
+                left: 10px; 
+                margin-top: 3rem;
+            }
+            .submit{
+                background-color: #114B5F;
+              color: rgb(255, 255, 255);
+              border-color:  transparent;
+              border-radius: 12px;
+              padding: 10px 20px;  
+              font-size: 20px; 
+              cursor: pointer; 
+              margin-top: 4rem;
+              margin-left: 30rem;
+            }
+
+            .container{
+            max-width: 1170px;
+            margin:auto;
+          }
+          .row{
+            display: flex;
+            flex-wrap: wrap;
+          }
+          ul{
+            list-style: none;
+          }
+         .footer{
+          background-color: #FAD5A5;
+            padding: 10px 0;
+            border-radius: 75% 75% 0 0 / 25%;
+        }
+        .footer-col{
+          width: 25%;
+          padding: 0 30px;
+        }
+        .footer-col h4{
+          font-size: 18px;
+          color: black;
+          text-transform: capitalize;
+          margin-bottom: 35px;
+          font-weight: 500;
+          position: relative;
+        }
+        .footer-col h4::before{
+          content: '';
+          position: absolute;
+          left:0;
+          bottom: -10px;
+          background-color: #e91e63;
+          height: 2px;
+          box-sizing: border-box;
+          width: 75px;
+        }
+        .footer-col ul li:not(:last-child){
+          margin-bottom: 10px;
+        }
+        .footer-col ul li a{
+          font-size: 16px;
+          text-transform: capitalize;
+          color: #ffffff;
+          text-decoration: none;
+          font-weight: 600;
+          color: black;
+          display: block;
+          transition: all 0.3s ease;
+        }
+        .footer-col ul li a:hover{
+          color: #251b1b;
+          padding-left: 8px;
+        }
+       
+        @media(max-width: 767px){
+          .footer-col{
+            width: 50%;
+            margin-bottom: 30px;
+        }
+        }
+        @media(max-width: 574px){
+          .footer-col{
+            width: 100%;
+        }
+        }
+
+
+        </style>
+    </head>
+    <body>
+    
+      <div class="navbar">
+        <img th:src="@{/logo.png}"></img>
+        <a th:href="@{/FurryPal/donate}" style="color:#FF9205;">Donate</a>
+        <a th:href="@{/FurryPal/contact}">Contact</a>
+        <a th:href="@{/FurryPal/blog}">Blog</a>
+        <a th:href="@{/FurryPal/buttonb4register}">Register pet</a>
+        <div class="subnav">
+          <button class="subnavbtn">Services <i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <a th:href="@{/FurryPal/petwatching}">Pet Watching</a>
+            <a th:href="@{/FurryPal/grooming}">Grooming</a>
+            <a th:href="@{/FurryPal/training}">Training</a>
+            <a th:href="@{/FurryPal/vet}">Vet</a>
+          </div>
+        </div> 
+        <div class="subnav">
+          <button class="subnavbtn">Categories <i class="fa fa-caret-down"></i></button>
+          <div class="subnav-content">
+            <a th:href="@{/FurryPal/cat}">Cat</a>
+            <a th:href="@{/FurryPal/dog}">Dog</a>
+          </div>
+        </div>
+        <a th:href="@{/FurryPal/home}">Home</a>
+      </div>
+        
+    </div>
+    <div class="main-content">
+      <img th:src="@{/girlai.png}"></img> 
+      <div class="tag-line"><p>Discover your purrfect match with our survey!</p>
+      </div>
+      <div class="thankyou">
+          <p>"Thank you for considering pet adoption!<br>
+              To ensure that we find the perfect match for you and your new pet, we ask that you take a moment to fill out our survey.<br>
+               Your responses will help us understand your lifestyle, preferences, and needs, allowing us to connect you with a pet that will fit seamlessly into your life.<br>
+                With your cooperation, we can make sure that this adoption is a happy and fulfilling experience for both you and your new furry friend."</p></div>
+    </div>
+    <section id="content">
+      <main>
+          <div class="table-data">
+              <form  action="#" th:action="@{/FurryPal/surveyresult}" th:object="${survey}"  method="POST">
+                  
+                  <div class="form-group"> 
+                      <label> &nbsp; 1. What type of pet are you interested in adopting?</label> </br> &emsp;
+                      <input th:field="*{question1}" class="form-control form-control-sm" type="radio" name="1" value="Dog" required/> <label>Dog&emsp; </label>
+                       <input th:field="*{question1}" class="form-control form-control-sm" type="radio" name="1" value="Cat" required/><label>Cat &emsp;</label>
+                  
+                  </div>
+                  <div class="form-group"> 
+                      <label>&nbsp;2.Do you have any previous experience in caring for a pet?</label> </br> &emsp;
+                     <input th:field="*{question2}" class="form-control form-control-sm" type="radio" name="2" value="Yes" required/><label>Yes &emsp; </label>
+                     <input th:field="*{question2}" class="form-control form-control-sm" type="radio" name="2" value="No" required/> <label>No &emsp; </label>
+                  </div>
+                  <div class="form-group">
+                      <label>&nbsp;3. Are there any specific behaviors or needs that you are looking for in a pet?</label> </br> &emsp;
+                      <label> <input th:field="*{question4}" class="form-control form-control-sm" type="checkbox" id="option1" name="option1" value="Good with children" required/> Good with children &emsp; </label>
+                      <label> <input th:field="*{question4}" class="form-control form-control-sm" type="checkbox" id="option2" name="option2" value="Low maintenance" /> Low maintenance &emsp; </label>
+                      <label> <input th:field="*{question4}" class="form-control form-control-sm" type="checkbox" id="option3" name="option3" value="Good with other pets" /> Good with other pets  </label>
+                  </div>
+                  <div class="form-group">
+                      <label>&nbsp;4. What type of pet are you willing to adopt?</label> </br> &emsp;
+                      <input th:field="*{question5}" class="form-control form-control-sm" type="radio" name="4" value="Young" required/> <label>Young &emsp; </label>
+                       <input th:field="*{question5}" class="form-control form-control-sm" type="radio" name="4" value="Adult" required/> <label>Adult&emsp;</label>
+                  </div>
+                  <div class="form-group">
+                      <label>&nbsp;5. Are you interested in adopting a pet for a specific purpose, such as for therapy or as a companion for another pet? </label> </br> &emsp;
+                      <input th:field="*{question6}" class="form-control form-control-sm" type="radio" name="5" value="Yes" required/> <label>Yes &emsp; </label>
+                      <input th:field="*{question6}" class="form-control form-control-sm" type="radio" name="5" value="No" required/> </label><label>No&emsp;
+                  </div>
+                  <button class="submit">Submit</button>
+              </form> 
+          </div>
+          </main>
+      </section>
+      <footer>
+        <footer class="footer">
+          <div class="container">
+            <div class="row">
+              <div class="footer-col">
+                <h4>Rescue, Love, Repeat</h4>
+                <ul>
+                  <li><a th:href="@{/FurryPal/survey}">Find Your Best Fit</a></li>
+                  <li><a th:href="@{/FurryPal/dog}">Dog</a></li>
+                  <li><a th:href="@{/FurryPal/cat}">Cat</a></li>
+                   
+                </ul>
+              </div>
+              <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                  <li><a th:href="@{/FurryPal/petwatching}">Pet Watching</a></li>
+                  <li><a th:href="@{/FurryPal/vet}">Pet Veterinary</a></li>
+                  <li><a th:href="@{/FurryPal/training}">Pet Training</a></li>
+                  <li><a th:href="@{/FurryPal/grooming}">Pet Grooming</a></li>
+                  
+                </ul>
+              </div>
+              <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                  <li><a th:href="@{/FurryPal/home}">Home</a></li>
+                  <li><a th:href="@{/FurryPal/contact}">contact</a></li>
+                  <li><a th:href="@{/FurryPal/blog}">Blog</a></li>
+                   <li><a th:href="@{/FurryPal/donate}">Donate</a></li>
+                 
+                </ul>
+              </div>
+              
+      </footer>
+
+</body>
+</html>

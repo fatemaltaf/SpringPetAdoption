@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="style.css">
+
+	<title>Add Animal</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
+:root {
+	--poppins: 'Poppins', sans-serif;
+	--lato: 'Lato', sans-serif;
+
+	--light: #F9F9F9;
+	--blue: #3C91E6;
+	--light-blue: #CFE8FF;
+	--grey: #eee;
+	--dark-grey: #AAAAAA;
+	--dark: #342E37;
+	--red: #DB504A;
+	--yellow: #FFCE26;
+	--light-yellow: #FFF2C6;
+	--orange: #FD7238;
+	--light-orange: #FFE0D3;
+}
+
+html {
+	overflow-x: hidden;
+}
+
+body.dark {
+	--light: #0C0C1E;
+	--grey: #060714;
+	--dark: #FBFBFB;
+}
+
+body {
+	background: var(--grey);
+	overflow-x: hidden;
+}
+#sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 280px;
+	height: 100%;
+	background: var(--light);
+	z-index: 2000;
+	font-family: var(--lato);
+	transition: .3s ease;
+	overflow-x: hidden;
+	scrollbar-width: none;
+}
+#sidebar::--webkit-scrollbar {
+	display: none;
+}
+#sidebar.hide {
+	width: 60px;
+}
+#sidebar .brand {
+	font-size: 24px;
+	font-weight: 700;
+	height: 56px;
+	display: flex;
+	align-items: center;
+	color: var(--blue);
+	position: sticky;
+	top: 0;
+	left: 0;
+	background: var(--light);
+	z-index: 500;
+	padding-bottom: 20px;
+	box-sizing: content-box;
+}
+#sidebar .brand .bx {
+	min-width: 60px;
+	display: flex;
+	justify-content: center;
+}
+#sidebar .side-menu {
+	width: 100%;
+	margin-top: 48px;
+}
+#sidebar .side-menu li {
+	height: 48px;
+	background: transparent;
+	margin-left: 6px;
+	border-radius: 48px 0 0 48px;
+	padding: 4px;
+}
+#sidebar .side-menu li.active {
+	background: var(--grey);
+	position: relative;
+}
+#sidebar .side-menu li.active::before {
+	content: '';
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	top: -40px;
+	right: 0;
+	box-shadow: 20px 20px 0 var(--grey);
+	z-index: -1;
+}
+#sidebar .side-menu li.active::after {
+	content: '';
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	bottom: -40px;
+	right: 0;
+	box-shadow: 20px -20px 0 var(--grey);
+	z-index: -1;
+}
+#sidebar .side-menu li a {
+	width: 100%;
+	height: 100%;
+	background: var(--light);
+	display: flex;
+	align-items: center;
+	border-radius: 48px;
+	font-size: 16px;
+	color: var(--dark);
+	white-space: nowrap;
+	overflow-x: hidden;
+}
+#sidebar .side-menu.top li.active a {
+	color: var(--blue);
+}
+#sidebar.hide .side-menu li a {
+	width: calc(48px - (4px * 2));
+	transition: width .3s ease;
+}
+#sidebar .side-menu li a.logout {
+	color: var(--red);
+}
+#sidebar .side-menu.top li a:hover {
+	color: var(--blue);
+}
+#sidebar .side-menu li a .bx {
+	min-width: calc(60px  - ((4px + 6px) * 2));
+	display: flex;
+	justify-content: center;
+}
+#content {
+	position: relative;
+	width: calc(100% - 280px);
+	left: 280px;
+	transition: .3s ease;
+}
+#sidebar.hide ~ #content {
+	width: calc(100% - 60px);
+	left: 60px;
+}
+
+#content main .table-data {
+	display: flex;
+	flex-wrap: wrap;
+	grid-gap: 24px;
+	margin-top: 24px;
+	width: 100%;
+	color: var(--dark);
+}
+#content main .table-data > div {
+	border-radius: 20px;
+	background: var(--light);
+	padding: 24px;
+	overflow-x: auto;
+    line-height: 3;
+    font-weight:800 ;
+}
+.dog-button{
+    font-size: 14px;
+	padding: 6px 16px;
+	color: var(--light);
+	border-radius: 20px;
+	font-weight: 700;
+    background: var(--blue);
+}
+.submit{
+    font-size: 14px;
+	padding: 6px 16px;
+	color: var(--light);
+	border-radius: 20px;
+	font-weight: 700;
+    background: var(--red);
+}
+input{
+    height: 25px;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">AdminHub</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a th:href="@{/FurryPal/admin/dashboard}" >
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a th:href="@{/FurryPal/admin/addpet}" >
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Add Animal</span>
+				</a>
+			</li>
+			
+				<li>
+					<a th:href="@{/FurryPal/admin/editpet}" >
+						<i class='bx bxs-shopping-bag-alt' ></i>
+						<span class="text">Edit Animal</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/FurryPal/admin/UserRegsPet}" >
+						<i class='bx bxs-shopping-bag-alt' ></i>
+						<span class="text">User Registered Animal</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/FurryPal/admin/addemployee}" >
+						<i class='bx bxs-doughnut-chart' ></i>
+						<span class="text">Add Services</span>
+					</a>
+				</li>
+			
+				<li>
+					<a th:href="@{/FurryPal/admin/editemployee}" >
+						<i class='bx bxs-doughnut-chart' ></i>
+						<span class="text">Edit Services</span>
+					</a>
+				</li>
+				<li>
+					<a th:href="@{/FurryPal/admin/contact}" >
+						<i class='bx bxs-message-dots' ></i>
+						<span class="text">Customer Message</span>
+					</a>
+				</li>
+			<!-- <li>
+				<a href="#">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Team</span>
+				</a>
+			</li> -->
+		</ul>
+		<ul class="side-menu">
+			
+			<li>
+				<a href="#" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+	
+    <section id="content">
+        <main>
+            <div class="table-data">
+				<div class="order">
+        
+        <div class="form-container">
+            <form  action="#" th:action="@{/FurryPal/admin/addemployeeRes}" th:object="${services}"  method="POST" enctype="multipart/form-data">
+                <label>Name </label><input th:field="*{name}" class="form-control form-control-sm" type="text" id="Name" name="Name" required><br>
+                <label>Fees </label><input th:field="*{fees}" class="form-control form-control-sm" type="number" id="Fees" name="Fees" required><br>
+				<label>Phone number </label>
+				<input type="tel" th:field="*{phone_no}" class="form-control form-control-sm" id="Phonenum" name="Phonenum"  minlength="10" maxlength="10" oninput="validatePhone(this)" required><br>
+				<!-- <label>Phone number </label><input type="number" th:field="*{phone_no}" class="form-control form-control-sm"  id="Phonenum" name="Phonenum"  min="10" max="10" required><br> -->
+				<!-- <label>Image </label><input th:field="*{photos}" type="file" accept="image/png, image/jpeg" class="form-control" id="image" name="image"/><br> -->
+				<label>Category </label> <input th:field="*{type}" class="form-control form-control-sm" type="radio" id="Category" name="Category" value="PetWatcher" required> <label> PetWatcher </label>
+                &emsp; <input th:field="*{type}" class="form-control form-control-sm" type="radio" id="Category" name="Category" value="Vet" required> <label> Vet </label>
+                &emsp; <input th:field="*{type}" class="form-control form-control-sm" type="radio" id="Category" name="Category" value="Trainer" required> <label> Trainer </label>
+                &emsp; <input th:field="*{type}" class="form-control form-control-sm" type="radio" id="Category" name="Category" value="Groomer" required> <label> Groomer </label>
+                <br>
+                <label>Qualification </label><input th:field="*{qualification}" class="form-control form-control-sm" id="Qualification" name="Qualification" required/><br>
+                <label>Location </label><input th:field="*{location}" class="form-control form-control-sm" id="Location" name="Location" required/><br>
+				<label>Experience </label><input th:field="*{experience}" class="form-control form-control-sm" id="Experience" name="Experience" required/><br>
+				<button class="submit">Submit</button>
+
+            </form>
+          
+          </div>
+          
+        </div>
+
+        </main>
+    </section>
+</body>
+<script>
+	 function validatePhone(inputField) {
+  const phoneNumber = inputField.value.trim();
+  if (/^\d{10}$/.test(phoneNumber)) {
+    inputField.setCustomValidity('');
+  } else {
+    inputField.setCustomValidity('Please enter a 10-digit phone number');
+  }
+}
+</script>
+</html>
